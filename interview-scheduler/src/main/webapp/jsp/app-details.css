@@ -90,3 +90,10 @@ form>button:hover{
 form>button:active{
    transform: scale(1.05);
 }
+form .span{
+    display: block;
+    padding: 5px 16px;
+   font-size: 16px;
+   
+    
+}

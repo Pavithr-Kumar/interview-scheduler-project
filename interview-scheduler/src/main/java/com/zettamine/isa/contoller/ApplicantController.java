@@ -76,7 +76,7 @@ public class ApplicantController extends HttpServlet {
 		case "edit-add":
 			Applicant applic = getApplicant(request);
 			applic.setApplicantId(Integer.parseInt(request.getParameter("id")));
-			services.update(applic, null);
+			services.update(applic);
 			rd=request.getRequestDispatcher("/applicant?action=showall");
 			rd.include(request, response);
 			break;
@@ -96,15 +96,15 @@ public class ApplicantController extends HttpServlet {
 			rd.include(request, response);
 			break;
 		case "schedule":
-			System.out.println("Schedule case");
+		
+			SkillService skillSe = new SkillService();
 			IsaSearchCriteria searchCrt = new IsaSearchCriteria();
 			ApplicantServices appSer = new ApplicantServices();
 			Applicant applicant = appSer.get(Integer.parseInt(request.getParameter("id"))).get();
 			searchCrt.setSkillId(Integer.parseInt(applicant.getApplicantSkill()));
 			InterviewerServices intSer = new InterviewerServices();
 			request.setAttribute("interviewers",intSer.getBySearchCriteria(searchCrt) );
-			System.out.println(applicant);
-			System.out.println(intSer.getBySearchCriteria(searchCrt));
+			request.setAttribute("applSkill", skillSe.getSkillById(Integer.parseInt(applicant.getApplicantSkill())));
 			request.setAttribute("applicant", applicant);
 			rd=request.getRequestDispatcher("schedule-interviews.jsp");
 			rd.include(request, response);

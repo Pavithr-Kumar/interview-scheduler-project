@@ -26,7 +26,7 @@ public class RecruiterDaoImpl implements IsaDao<Recruiter, IsaSearchCriteria> {
 
 	@Override
 	public Optional<Recruiter> get(int id) {
-		// TODO Auto-generated method stub
+		
 		return Optional.empty();
 	}
 

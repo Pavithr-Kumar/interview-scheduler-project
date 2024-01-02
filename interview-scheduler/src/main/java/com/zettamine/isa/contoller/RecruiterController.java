@@ -18,6 +18,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RecruiterController
@@ -42,21 +43,31 @@ public class RecruiterController extends HttpServlet {
 		String email=request.getParameter("email");
 		String pass = request.getParameter("password");
 		RecruiterServices service = new RecruiterServices();
-		
+		String logout = request.getParameter("logout");
 		
 		RequestDispatcher rd;
+//		if(logout!=null) {
+//			HttpSession session = request.getSession();
+//			session.removeAttribute("email");
+//			response.sendRedirect("index.jsp");
+//			
+//		}
 		PrintWriter out = response.getWriter();
 		
 			if(service.verifyRecruiter(email,pass)) {
-				
-				rd = request.getRequestDispatcher("index.jsp");
-				rd.forward(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("email", email);
+				if(session.getAttribute("email")!=null) {
+					
+					rd = request.getRequestDispatcher("index.jsp");
+					rd.forward(request, response);
+				}
 				
 			}else if(request.getParameter("logout")!=null) {
 				
 				rd = request.getRequestDispatcher("login.jsp");
 			}
-			else
+			else 
 			{
 				
 				
