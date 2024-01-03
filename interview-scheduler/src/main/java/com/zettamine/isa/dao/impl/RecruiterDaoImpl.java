@@ -57,8 +57,7 @@ public class RecruiterDaoImpl implements IsaDao<Recruiter, IsaSearchCriteria> {
 	@Override
 	public List<Recruiter> getBySearchCriteria(IsaSearchCriteria criteria) {
 		
-		System.out.println(criteria.getRecrEmail());
-		System.out.println(criteria.getRecrPassword());
+		
 		String query ="select * from isa.recruiter where email=? and password=?;";
 		
 		List<Recruiter> recrList= new ArrayList<>();
@@ -76,7 +75,7 @@ public class RecruiterDaoImpl implements IsaDao<Recruiter, IsaSearchCriteria> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(recrList);
+		
 		return recrList;
 	}
 

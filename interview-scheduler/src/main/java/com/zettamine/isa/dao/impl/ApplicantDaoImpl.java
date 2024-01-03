@@ -25,7 +25,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 	@Override
 	public Optional<Applicant> get(int id) {
 		Optional<Applicant> applicant = null;
-		String query="select * from isa.applicant where applicant_id ="+id;
+		String query="select * from isa.applicant where active='ACTIVE' and applicant_id ="+id;
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs= st.executeQuery(query);
@@ -55,7 +55,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 		List<Applicant> list= new ArrayList<>();
 		Statement st;
 		try {
-			String query ="select * from isa.applicant order by applicant_id;";
+			String query ="select * from isa.applicant where active='ACTIVE' order by applicant_id;";
 			st = con.createStatement();
 			ResultSet rs=st.executeQuery(query);
 			Applicant appl;
@@ -83,7 +83,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 	@Override
 	public List<Applicant> getBySearchCriteria(IsaSearchCriteria criteria) {
 		List<Applicant> list=new ArrayList<Applicant>();
-		String query ="select * from isa.applicant where primary_skill="+criteria.getSkillId();
+		String query ="select * from isa.applicant where  active='ACTIVE' and primary_skill="+criteria.getSkillId();
 		PreparedStatement pst;
 		try {
 			pst = con.prepareStatement(query);
@@ -162,7 +162,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 	@Override
 	public void delete(Applicant t) {
 		try {
-			String query="delete from isa.applicant where applicant_id="+t.getApplicantId();
+			String query="update isa.applicant set active='INACTIVE' where applicant_id="+t.getApplicantId();
 			Statement st =con.createStatement();
 			st.executeUpdate(query);
 			

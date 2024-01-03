@@ -43,34 +43,32 @@ public class RecruiterController extends HttpServlet {
 		String email=request.getParameter("email");
 		String pass = request.getParameter("password");
 		RecruiterServices service = new RecruiterServices();
-		String logout = request.getParameter("logout");
 		
+		HttpSession session = request.getSession();
 		RequestDispatcher rd;
-//		if(logout!=null) {
-//			HttpSession session = request.getSession();
-//			session.removeAttribute("email");
-//			response.sendRedirect("index.jsp");
-//			
-//		}
-		PrintWriter out = response.getWriter();
+		if(request.getParameter("logout")!=null) {
+			//System.out.println("If case logout");
+			session.removeAttribute("username");
+			rd= request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+		}
+		
+
+		
 		
 			if(service.verifyRecruiter(email,pass)) {
-				HttpSession session = request.getSession();
 				session.setAttribute("email", email);
-				if(session.getAttribute("email")!=null) {
-					
-					rd = request.getRequestDispatcher("index.jsp");
-					rd.forward(request, response);
+				//System.out.println("verified");
+					session.setAttribute("username", "user1");
+					rd= request.getRequestDispatcher("index.jsp");
+					rd.include(request, response);
 				}
 				
-			}else if(request.getParameter("logout")!=null) {
-				
-				rd = request.getRequestDispatcher("login.jsp");
-			}
+			
 			else 
 			{
 				
-				
+				//System.out.println("Else not verified");
 				rd = request.getRequestDispatcher("login.jsp");
 				
 				

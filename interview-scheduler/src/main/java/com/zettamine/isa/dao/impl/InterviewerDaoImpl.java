@@ -31,7 +31,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 		IsaSkillDaoImpl skillDao = new IsaSkillDaoImpl();
 		Optional<Interviewer> interviewerOpt = null;
 				try {
-			presat = con.prepareStatement("SELECT * FROM isa.interviewer WHERE interviewer_id = ?");
+			presat = con.prepareStatement("SELECT * FROM isa.interviewer WHERE active='ACTIVE' interviewer_id = ?");
 			presat.setInt(1, id);
 			ResultSet rs = presat.executeQuery();
 			while(rs.next()) {
@@ -53,7 +53,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 		
 		List<Interviewer> intList = new ArrayList<>();
 		try {
-			presat =con.prepareStatement("SELECT * FROM isa.interviewer order by interviewer_id");
+			presat =con.prepareStatement("SELECT * FROM isa.interviewer where active='ACTIVE' order by interviewer_id");
 			ResultSet rs = presat.executeQuery();
 			while(rs.next()) {
 				int intId = rs.getInt(1);
@@ -76,7 +76,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 		List<Interviewer> intList = new ArrayList<>();
 		
 		try {
-			presat = con.prepareStatement("SELECT * FROM isa.interviewer WHERE primary_skill = ?");
+			presat = con.prepareStatement("SELECT * FROM isa.interviewer  where active='ACTIVE' and primary_skill = ?");
 			System.out.println(criteria.getSkillId());
 			presat.setInt(1, criteria.getSkillId());
 			ResultSet rs = presat.executeQuery();
@@ -129,7 +129,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 	public void delete(Interviewer t) {
 		
 		try {
-			presat = con.prepareStatement("DELETE from isa.interviewer WHERE interviewer_id = ?");
+			presat = con.prepareStatement("update  isa.interviewer set active='ACTIVE' WHERE interviewer_id = ?");
 			presat.setInt(1,t.getInterviewerId());
 			presat.executeUpdate();
 		} catch (SQLException e) {
