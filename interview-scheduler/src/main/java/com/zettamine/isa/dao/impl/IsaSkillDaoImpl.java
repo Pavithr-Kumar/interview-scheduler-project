@@ -31,7 +31,7 @@ public class IsaSkillDaoImpl implements IsaDao<Skill, SearchCriteria> {
 			ResultSet rs = presat.executeQuery();
 			while(rs.next()) {
 				int skillId = rs.getInt(1);
-				String skillDesc = rs.getString(2);
+				String skillDesc = rs.getString(2).toUpperCase();
 				skill = Optional.ofNullable(new Skill(skillId, skillDesc));
 			}
 				

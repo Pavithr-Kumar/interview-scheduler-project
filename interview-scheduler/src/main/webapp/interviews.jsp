@@ -77,7 +77,8 @@ cursor:pointer;
     <h1>Scheduled Interviews</h1>
     <div class="buttons">
         <a href="/interview-scheduler/interview?action=showall" style="color: white;background-color: rgb(129, 182, 49);">Show All <i class="fa-solid fa-list-ol"></i></a>
-          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        <a href="search-interview.jsp" style="color: white;background-color: rgb(182, 100, 100);"><i class="fa-solid fa-magnifying-glass"></i> search</a>
+         
 
        
 

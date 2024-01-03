@@ -49,7 +49,7 @@ public class InterviewController extends HttpServlet {
 		
 		switch(action) {
 		case "schedule-new":
-			System.out.println("case");
+			
 			ScheduleInterview schedInter = getScheduledInterview(request);
 			service.save(schedInter);
 			rd=request.getRequestDispatcher("/interview?action=showall");
@@ -102,6 +102,41 @@ public class InterviewController extends HttpServlet {
 			rd= request.getRequestDispatcher("/interview?action=showall");
 			rd.include(request, response);
 			break;
+		case "search":
+			String applName=null;
+              if(!request.getParameter("applName").isBlank()) {
+				
+            	  applName= request.getParameter("applName");
+			}
+              String interName=null;
+              if(!request.getParameter("interName").isBlank()) {
+            	  
+            	  interName= request.getParameter("interName");
+              }
+			
+			Date fromDate=null;
+			System.out.println("Hello ");
+			if(!request.getParameter("fromDate").isBlank()) {
+				
+				fromDate =  Date.valueOf(LocalDate.parse(request.getParameter("fromDate")));
+			}
+			Date toDate=null;
+			if(!request.getParameter("toDate").isBlank())
+				toDate =  Date.valueOf(LocalDate.parse(request.getParameter("toDate")));
+			
+			IsaSearchCriteria criteria = new IsaSearchCriteria();
+			criteria.setInterviewerName(interName);
+			criteria.setApplicantName(applName);
+			criteria.setFromDate(fromDate);
+			criteria.setToDate(toDate);
+			List<InterviewScheduleView> interviewsList = service.getBySearchCriteria(criteria);
+			System.out.println(interviewsList);
+			request.setAttribute("interviews", interviewsList);
+			rd= request.getRequestDispatcher("interviews.jsp");
+			rd.include(request, response);
+			break;
+			
+			
 			
 			
 			

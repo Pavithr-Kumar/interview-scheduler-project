@@ -117,7 +117,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 				+ "values(?,?,?,?,?,?,?,?);";
 		try {
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setString(1, t.getApplicantName());
+			pst.setString(1, t.getApplicantName().toUpperCase());
 			pst.setString(2, t.getApplicantEmail());
 			pst.setString(3, t.getApplicantPhNo());
 			pst.setString(4, t.getApplicantQualification());
@@ -143,7 +143,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 					+ "  highest_qualification=?,  total_aggregate=?,  stream=?,"
 					+ " remarks=?, primary_skill= ? where applicant_id="+t.getApplicantId();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setString(1, t.getApplicantName());
+			pst.setString(1, t.getApplicantName().toUpperCase());
 			pst.setString(2, t.getApplicantEmail());
 			pst.setString(3, t.getApplicantPhNo());
 			pst.setString(4, t.getApplicantQualification());

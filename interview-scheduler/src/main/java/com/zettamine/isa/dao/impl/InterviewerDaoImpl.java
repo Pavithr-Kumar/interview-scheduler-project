@@ -36,7 +36,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 			ResultSet rs = presat.executeQuery();
 			while(rs.next()) {
 				int intId = rs.getInt(1);
-				String name = rs.getString(2);
+				String name = rs.getString(2).toUpperCase();
 				String email = rs.getString(3);
 				String skill = skillDao.getSkillById(rs.getInt(4));
 				String remarks = rs.getString(5);
@@ -115,7 +115,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 		try {
 			presat = con.prepareStatement("UPDATE isa.interviewer set interviewer_name = ?,  email =? ,primary_skill = ?"
 					+ " WHERE interviewer_id = ?");
-			presat.setString(1, t.getInterviewerName());
+			presat.setString(1, t.getInterviewerName().toUpperCase());
 			presat.setString(2, t.getInterviewerEmail());
 			presat.setInt(3, Integer.parseInt(t.getInterviewerSkill()));
 			presat.setInt(4, t.getInterviewerId());
