@@ -10,6 +10,13 @@
     <title>interviewers</title>
 </head>
 <style>
+table{
+margin-bottom:60px;
+}
+th,td{
+    padding: 15px 25px;
+    
+}
 .buttons select{
 margin-left: 16px ;
 border-radius: 10px;
@@ -113,7 +120,7 @@ cursor:pointer;
                
                
                 
-                <td><a href="/interview-scheduler/interviewer?action=edit&id=${interviewer.getInterviewerId() }"><i style=color:black class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="/interview-scheduler/interviewer?action=edit&id=${interviewer.getInterviewerId() }"><i style=color:blue class="fa-solid fa-pen-to-square"></i></a></td>
                 <td><a href="/interview-scheduler/interviewer?action=delete&id=${interviewer.getInterviewerId() }"><i  class="fa-solid fa-trash" onclick="return confirm('Do you want to delete this interviewer ?')"></i></a></td>
             </tr>
             </c:forEach>

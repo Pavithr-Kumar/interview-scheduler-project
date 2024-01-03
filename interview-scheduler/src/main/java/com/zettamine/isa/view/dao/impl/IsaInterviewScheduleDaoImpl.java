@@ -27,7 +27,7 @@ public class IsaInterviewScheduleDaoImpl implements IsaViewDAO<InterviewSchedule
 	public List<InterviewScheduleView> getAll() {
 		 
 		List<InterviewScheduleView> isvList = new ArrayList<>();
-		String querey = "SELECT * FROM isa.schedule_view";
+		String querey = "SELECT * FROM isa.schedule_view order by schedule_id";
 		try {
 			presat = conn.prepareStatement(querey);
 			

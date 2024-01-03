@@ -55,7 +55,7 @@ public class ApplicantDaoImpl implements IsaDao<Applicant, IsaSearchCriteria> {
 		List<Applicant> list= new ArrayList<>();
 		Statement st;
 		try {
-			String query ="select * from isa.applicant;";
+			String query ="select * from isa.applicant order by applicant_id;";
 			st = con.createStatement();
 			ResultSet rs=st.executeQuery(query);
 			Applicant appl;

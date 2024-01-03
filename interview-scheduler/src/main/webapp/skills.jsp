@@ -69,7 +69,7 @@ cursor:pointer;
             <tr>
                 <th>Skill Id</th>
                 <th>Skill Description</th>
-                <th>Delete</th>
+                
             </tr>
             
             <c:forEach items="${skills}" var="skill" >
@@ -78,7 +78,7 @@ cursor:pointer;
                 <td>${skill.getSkillId() }</td>
                 <td>${skill.getSkillDsec() }</td>
                 
-                <td><a href="/interview-scheduler/skill?action=delete&id=${skill.getSkillId() }"><i class="fa-solid fa-trash" onclick="return confirm('Do you want to delete this skill?')"></i></a></td>
+                
             </tr>
             </c:forEach>
             

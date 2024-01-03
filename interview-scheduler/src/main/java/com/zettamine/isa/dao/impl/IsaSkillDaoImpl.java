@@ -46,7 +46,7 @@ public class IsaSkillDaoImpl implements IsaDao<Skill, SearchCriteria> {
 		
 		List<Skill> skillList = new ArrayList<Skill>();
 		try {
-			presat = con.prepareStatement("SELECT * FROM isa.skill");
+			presat = con.prepareStatement("SELECT * FROM isa.skill order by skill_id");
 			ResultSet rs = presat.executeQuery();
 			while(rs.next()) {
 				

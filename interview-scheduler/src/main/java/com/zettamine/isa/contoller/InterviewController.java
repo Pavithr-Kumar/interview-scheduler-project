@@ -7,9 +7,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.zettamine.isa.dto.Applicant;
+import com.zettamine.isa.dto.IsaSearchCriteria;
 import com.zettamine.isa.dto.ScheduleInterview;
 import com.zettamine.isa.dto.Status;
+import com.zettamine.isa.service.impl.ApplicantServices;
+import com.zettamine.isa.service.impl.InterviewerServices;
 import com.zettamine.isa.service.impl.ScheduleInterviewService;
+import com.zettamine.isa.service.impl.SkillService;
 import com.zettamine.isa.view.dto.InterviewScheduleView;
 
 import jakarta.servlet.RequestDispatcher;
@@ -41,6 +46,7 @@ public class InterviewController extends HttpServlet {
 		String action=request.getParameter("action");
 		ScheduleInterviewService service = new ScheduleInterviewService();
 		RequestDispatcher rd;
+		
 		switch(action) {
 		case "schedule-new":
 			System.out.println("case");
@@ -57,12 +63,48 @@ public class InterviewController extends HttpServlet {
 			rd.include(request, response);
 			break;
 		case "delete":
-			ScheduleInterview obj = new ScheduleInterview();
-			obj.setScheduleId(Integer.parseInt(request.getParameter("id")));
-			service.delete(obj);
+			ScheduleInterview schedInterview = new ScheduleInterview();
+			schedInterview.setScheduleId(Integer.parseInt(request.getParameter("id")));
+			service.delete(schedInterview);
 			rd=request.getRequestDispatcher("/interview?action=showall");
 			rd.include(request, response);
 			break;
+		case "edit":
+			Integer shedId =Integer.parseInt(request.getParameter("id"));
+			ScheduleInterviewService schedIntrSer = new ScheduleInterviewService();
+			ApplicantServices applServ = new ApplicantServices();
+			IsaSearchCriteria searchCrt = new IsaSearchCriteria();
+			InterviewerServices intSer = new InterviewerServices();
+			SkillService skillSer = new SkillService();
+			
+		
+			ScheduleInterview schedInterv = schedIntrSer.getScheduledInterview(shedId);
+			Integer interviewerId = schedInterv.getInterviewerId();
+			Integer applId =schedInterv.getApplicantId();
+			Applicant applicant = applServ.get(applId).get();
+			request.setAttribute("interviewDetails", schedInterv);
+			
+			request.setAttribute("schedule",schedIntrSer.get(shedId));
+			System.out.println(schedIntrSer.get(shedId));
+			request.setAttribute("applSkill", skillSer.getSkillById(Integer.valueOf(( applicant.getApplicantSkill()))));
+			request.setAttribute("applicant", applicant);
+			searchCrt.setSkillId(Integer.parseInt(applicant.getApplicantSkill()));
+			request.setAttribute("interviewers",intSer.getBySearchCriteria(searchCrt) );
+			rd = request.getRequestDispatcher("update-schedule.jsp");
+			rd.include(request, response);
+			break;
+		case "update":
+			Integer scheId =Integer.parseInt(request.getParameter("id"));
+			ScheduleInterview obj = getScheduledInterview(request);
+			obj.setScheduleId(scheId);
+			service.update(obj);
+			
+			rd= request.getRequestDispatcher("/interview?action=showall");
+			rd.include(request, response);
+			break;
+			
+			
+			
 			
 			
 			

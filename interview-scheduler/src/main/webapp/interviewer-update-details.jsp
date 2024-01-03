@@ -30,6 +30,7 @@
                      
                 </div>
                 <div id="subcol2">
+                
                     <input type="hidden" name="id" value="${interviewer.getInterviewerId() }">
                     <input type="text" value="${interviewer.getInterviewerName() }" name="name" required placeholder="name">
                     <input type="email" name="email" value="${interviewer.getInterviewerEmail() }" required placeholder="email">

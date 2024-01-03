@@ -10,6 +10,13 @@
     <title>Applicants</title>
 </head>
 <style>
+table{
+margin-bottom:60px;
+}
+th,td{
+    padding: 15px 25px;
+    
+}
 .buttons select{
 margin-left: 16px ;
 border-radius: 10px;

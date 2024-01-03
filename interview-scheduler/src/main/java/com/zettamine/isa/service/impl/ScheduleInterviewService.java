@@ -19,6 +19,11 @@ public class ScheduleInterviewService {
 		Optional<InterviewScheduleView> optional = viewDao.get(id);
 		return optional.get();
 	}
+	public ScheduleInterview getScheduledInterview(Integer id) {
+		
+		Optional<ScheduleInterview> optional = dao.get(id);
+		return optional.get();
+	}
 	
 	public void save(ScheduleInterview interview) {
 		dao.save(interview);

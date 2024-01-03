@@ -53,7 +53,7 @@ public class InterviewerDaoImpl implements IsaDao<Interviewer, IsaSearchCriteria
 		
 		List<Interviewer> intList = new ArrayList<>();
 		try {
-			presat =con.prepareStatement("SELECT * FROM isa.interviewer");
+			presat =con.prepareStatement("SELECT * FROM isa.interviewer order by interviewer_id");
 			ResultSet rs = presat.executeQuery();
 			while(rs.next()) {
 				int intId = rs.getInt(1);

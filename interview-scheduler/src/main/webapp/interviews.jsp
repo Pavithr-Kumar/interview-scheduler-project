@@ -10,6 +10,13 @@
     <title>Interviews</title>
 </head>
 <style>
+table{
+margin-bottom:60px;
+}
+th,td{
+    padding: 15px 25px;
+    
+}
 .buttons select{
 margin-left: 16px ;
 border-radius: 10px;
@@ -67,7 +74,7 @@ cursor:pointer;
 </style>
 <body>
    
-    <h1>Applicants</h1>
+    <h1>Scheduled Interviews</h1>
     <div class="buttons">
         <a href="/interview-scheduler/interview?action=showall" style="color: white;background-color: rgb(129, 182, 49);">Show All <i class="fa-solid fa-list-ol"></i></a>
           <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
